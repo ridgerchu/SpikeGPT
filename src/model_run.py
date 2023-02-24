@@ -13,22 +13,18 @@ from src.spikingjelly.clock_driven import surrogate, neuron
 RWKV_HEAD_QK_DIM = 0
 print(f'\nRWKV_HEAD_QK_DIM {RWKV_HEAD_QK_DIM}\n')
 
-DEBUG_TIME = False  # True False - show trained time-coeffs
+DEBUG_TIME = False   # True False - show trained time-coeffs
 
 ########################################################################################################
 # CUDA Kernel
 ########################################################################################################
 
-T_MAX = 1024  # increase this if your ctx_len is long [NOTE: TAKES LOTS OF VRAM!]
+T_MAX = 1024 # increase this if your ctx_len is long [NOTE: TAKES LOTS OF VRAM!]
 # it's possible to go beyond CUDA limitations if you slice the ctx and pass the hidden state in each slice
 
 from torch.utils.cpp_extension import load
-
 wkv_cuda = load(name="wkv", sources=["cuda/wkv_op.cpp", "cuda/wkv_cuda.cu"],
-                verbose=True,
-                extra_cuda_cflags=['-res-usage', '--maxrregcount 60', '--use_fast_math', '-O3', '-Xptxas -O3',
-                                   f'-DTmax={T_MAX}'])
-
+                verbose=True, extra_cuda_cflags=['-res-usage', '--maxrregcount 60', '--use_fast_math', '-O3', '-Xptxas -O3', f'-DTmax={T_MAX}'])
 
 class WKV(torch.autograd.Function):
     @staticmethod
@@ -52,13 +48,12 @@ class WKV(torch.autograd.Function):
         y = torch.empty((B, T, C), device='cuda', memory_format=torch.contiguous_format)
         wkv_cuda.forward(B, T, C, w, u, k, v, y)
         return y
-
-    #         if '32' in os.environ['RWKV_FLOAT_MODE']:
-    #             return y
-    #         elif os.environ['RWKV_FLOAT_MODE'] == 'fp16':
-    #             return y.half()
-    #         elif os.environ['RWKV_FLOAT_MODE'] == 'bf16':
-    #             return y.bfloat16()
+#         if '32' in os.environ['RWKV_FLOAT_MODE']:
+#             return y
+#         elif os.environ['RWKV_FLOAT_MODE'] == 'fp16':
+#             return y.half()
+#         elif os.environ['RWKV_FLOAT_MODE'] == 'bf16':
+#             return y.bfloat16()
 
     @staticmethod
     def backward(ctx, gy):
@@ -72,15 +67,13 @@ class WKV(torch.autograd.Function):
         gu = torch.zeros((B, C), device='cuda').contiguous()
         gk = torch.zeros((B, T, C), device='cuda').contiguous()
         gv = torch.zeros((B, T, C), device='cuda').contiguous()
-        #         if '32' in os.environ['RWKV_FLOAT_MODE']:
-        #             wkv_cuda.backward(B, T, C, w, u, k, v, gy.contiguous(), gw, gu, gk, gv)
-        #         else:
+#         if '32' in os.environ['RWKV_FLOAT_MODE']:
+#             wkv_cuda.backward(B, T, C, w, u, k, v, gy.contiguous(), gw, gu, gk, gv)
+#         else:
         wkv_cuda.backward(B, T, C, w, u, k, v, gy.float().contiguous(), gw, gu, gk, gv)
         gw = torch.sum(gw, dim=0)
         gu = torch.sum(gu, dim=0)
         return (None, None, None, gw, gu, gk, gv)
-
-
 #         if '32' in os.environ['RWKV_FLOAT_MODE']:
 #             return (None, None, None, gw, gu, gk, gv)
 #         elif os.environ['RWKV_FLOAT_MODE'] == 'fp16':
@@ -91,18 +84,16 @@ class WKV(torch.autograd.Function):
 def RUN_CUDA(B, T, C, w, u, k, v):
     return WKV.apply(B, T, C, w.cuda(), u.cuda(), k.cuda(), v.cuda())
 
-
 ############################################################################################################
 
 RWKV_CFG = types.SimpleNamespace()
-
 
 class RWKV_ChannelMix(nn.Module):
     def __init__(self, layer_id):
         super().__init__()
         self.layer_id = layer_id
 
-        self.time_shift = nn.ZeroPad2d((0, 0, 1, -1))
+        self.time_shift = nn.ZeroPad2d((0,0,1,-1))
         self.time_mix_k = nn.Parameter(torch.ones(1, 1, RWKV_CFG.n_embd))
         self.time_mix_r = nn.Parameter(torch.ones(1, 1, RWKV_CFG.n_embd))
 
@@ -119,10 +110,9 @@ class RWKV_ChannelMix(nn.Module):
         k = self.key(xk)
         k = torch.square(torch.relu(k))
         kv = self.value(k)
-
+        
         rkv = torch.sigmoid(self.receptance(xr)) * kv
         return rkv
-
 
 class RWKV_TimeMix(nn.Module):
     def __init__(self, layer_id):
@@ -130,11 +120,11 @@ class RWKV_TimeMix(nn.Module):
         self.layer_id = layer_id
         self.time_decay = nn.Parameter(torch.ones(RWKV_CFG.n_embd))
         self.time_first = nn.Parameter(torch.ones(RWKV_CFG.n_embd) * math.log(0.3))
-
-        self.time_shift = nn.ZeroPad2d((0, 0, 1, -1))
-        self.time_mix_k = nn.Parameter(torch.ones(1, 1, RWKV_CFG.n_embd))
-        self.time_mix_v = nn.Parameter(torch.ones(1, 1, RWKV_CFG.n_embd))
-        self.time_mix_r = nn.Parameter(torch.ones(1, 1, RWKV_CFG.n_embd))
+        
+        self.time_shift = nn.ZeroPad2d((0,0,1,-1))
+        self.time_mix_k = nn.Parameter(torch.ones(1,1,RWKV_CFG.n_embd))
+        self.time_mix_v = nn.Parameter(torch.ones(1,1,RWKV_CFG.n_embd))
+        self.time_mix_r = nn.Parameter(torch.ones(1,1,RWKV_CFG.n_embd))
 
         self.key = nn.Linear(RWKV_CFG.n_embd, RWKV_CFG.n_embd, bias=False)
         self.value = nn.Linear(RWKV_CFG.n_embd, RWKV_CFG.n_embd, bias=False)
@@ -155,10 +145,9 @@ class RWKV_TimeMix(nn.Module):
         r = self.receptance(xr)
 
         rwkv = torch.sigmoid(r) * RUN_CUDA(B, T, C, self.time_decay, self.time_first, k, v)
-
+        
         rwkv = self.output(rwkv)
         return rwkv
-
 
 class Block(nn.Module):
     def __init__(self, layer_id):
@@ -171,7 +160,7 @@ class Block(nn.Module):
             self.ln0 = nn.LayerNorm(RWKV_CFG.n_embd)
 
         if self.layer_id == 0 and RWKV_CFG.model_type == 'RWKV-ffnPre':
-            self.ffnPre = RWKV_ChannelMix(layer_id + 1000)
+            self.ffnPre = RWKV_ChannelMix(layer_id+1000)
         else:
             self.att = RWKV_TimeMix(layer_id)
 
@@ -186,7 +175,6 @@ class Block(nn.Module):
             x = x + self.att(self.ln1(x))
         x = x + self.ffn(self.ln2(x))
         return x
-
 
 class RWKV_GPT(nn.Module):
     def __init__(self, MODEL_NAME, RUN_DEVICE, model_type, vocab_size, n_layer, n_embd, ctx_len):
@@ -225,7 +213,7 @@ class RWKV_GPT(nn.Module):
     def forward(self, idx):
         B, T = idx.size()
         assert T <= self.ctx_len, "Cannot forward, because len(input) > model ctx_len."
-
+        
         x = self.emb(idx)
         x = self.blocks(x)
         x = self.ln_out(x)
@@ -236,23 +224,22 @@ class RWKV_GPT(nn.Module):
             c = (q @ k.transpose(-2, -1)) * (1.0 / RWKV_HEAD_QK_DIM)
             c = c.masked_fill(self.copy_mask[:T, :T] == 0, 0)
             c = c @ F.one_hot(idx, num_classes=RWKV_CFG.vocab_size)
-            #             if '32' in os.environ['RWKV_FLOAT_MODE']:
-            #                 c = c @ F.one_hot(idx, num_classes=RWKV_CFG.vocab_size)
-            #             elif os.environ['RWKV_FLOAT_MODE'] == 'fp16':
-            #                 c = c @ F.one_hot(idx, num_classes=RWKV_CFG.vocab_size).half()
-            #             elif os.environ['RWKV_FLOAT_MODE'] == 'bf16':
-            #                 c = c @ F.one_hot(idx, num_classes=RWKV_CFG.vocab_size).bfloat16()
+#             if '32' in os.environ['RWKV_FLOAT_MODE']:
+#                 c = c @ F.one_hot(idx, num_classes=RWKV_CFG.vocab_size)
+#             elif os.environ['RWKV_FLOAT_MODE'] == 'fp16':
+#                 c = c @ F.one_hot(idx, num_classes=RWKV_CFG.vocab_size).half()
+#             elif os.environ['RWKV_FLOAT_MODE'] == 'bf16':
+#                 c = c @ F.one_hot(idx, num_classes=RWKV_CFG.vocab_size).bfloat16()
 
             x = self.head(x) + c
         else:
-            x = self.head(x)
+            x = self.head(x)        
 
         return x
 
-
 ############################################################################################################
 
-class RWKV_RNN():  # this is running in FP32 at this moment
+class RWKV_RNN(): # this is running in FP32 at this moment
     def __init__(self, MODEL_NAME, RUN_DEVICE, model_type, n_layer, n_embd, ctx_len):
         self.RUN_DEVICE = RUN_DEVICE
         self.model_type = model_type
@@ -287,7 +274,7 @@ class RWKV_RNN():  # this is running in FP32 at this moment
                     if i == len(xx) - 1:
                         setattr(here, xx[i], w[x])
                     elif not hasattr(here, xx[i]):
-                        if xx[i + 1].isdigit():
+                        if xx[i+1].isdigit():
                             setattr(here, xx[i], {})
                         else:
                             setattr(here, xx[i], types.SimpleNamespace())
