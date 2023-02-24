@@ -1,7 +1,7 @@
 # SpikeGPT: Generative Pre-trained Language Model with Spiking Neural Networks
 
 <p align="center" float="center">
-  <img src="static/spikegpt.jpg"/>
+  <img src="https://github.com/ridgerchu/SpikeGPT/blob/master/static/spikegpt.png"/>
 </p>
 
 SpikeGPT is a lightweight generative language model with pure binary, event-driven spiking activation units.
