@@ -5,6 +5,7 @@
 </p>
 
 SpikeGPT is a lightweight generative language model with pure binary, event-driven spiking activation units.
+This repo is inspired by the [RWKV-LM](https://github.com/BlinkDL/RWKV-LM)
 
 ## Training on Enwik8
 
@@ -16,7 +17,7 @@ SpikeGPT is a lightweight generative language model with pure binary, event-driv
 1. Modify the  'context' variable in `run.py` to your custom prompt
 2. Run `run.py`
 
-This repo is inspired by the [RWKV-LM](https://github.com/BlinkDL/RWKV-LM)
+
 
 ## Citation
 
