@@ -6,6 +6,8 @@
 
 SpikeGPT is a lightweight generative language model with pure binary, event-driven spiking activation units.
 
+If you are interested in SpikeGPT, feel free to join our Discord by this [link](https://discord.gg/gdUpuTJ6QZ)!
+
 This repo is inspired by the [RWKV-LM](https://github.com/BlinkDL/RWKV-LM).
 
 ## Training on Enwik8
