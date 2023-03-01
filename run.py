@@ -33,7 +33,7 @@ setup_io()
 
 TOKEN_MODE = 'char' # char / bpe / pile
 #For book Corpus Pre-trained model
-n_layer = 24
+n_layer = 18
 n_embd = 512
 ctx_len = 1024
 
