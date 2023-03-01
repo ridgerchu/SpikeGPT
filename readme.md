@@ -17,12 +17,12 @@ This repo is inspired by the [RWKV-LM](https://github.com/BlinkDL/RWKV-LM).
 
 ## Inference with Prompt
 
-You can choose to inference with your customized model or with our pre-trained model, our pre-trained model on BookCorpus is avaiable here:
+You can choose to inference with your customized model or with our pre-trained model, our pre-trained model on BookCorpus is avaiable [here](https://huggingface.co/ridger/SpikeGPT-BookCorpus/blob/main/BookCorpus-SpikeGPT.pth).
 
 1. Modify the hyper-parameter of the network, which could be found in line 36-38 of the `run.py`:
 ```python
 # For BookCorpus pre-trained model, you can change it if you trained your own model.
-n_layer = 24
+n_layer = 18
 n_embd = 512
 ctx_len = 1024
 ```
