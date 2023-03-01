@@ -15,8 +15,18 @@ This repo is inspired by the [RWKV-LM](https://github.com/BlinkDL/RWKV-LM).
 
 ## Inference with Prompt
 
-1. Modify the  'context' variable in `run.py` to your custom prompt
-2. Run `run.py`
+You can choose to inference with your customized model or with our pre-trained model, our pre-trained model on BookCorpus is avaiable here:
+
+1. Modify the hyper-parameter of the network, which could be found in line 36-38 of the `run.py`:
+```python
+# For BookCorpus pre-trained model, you can change it if you trained your own model.
+n_layer = 24
+n_embd = 512
+ctx_len = 1024
+```
+2. download our BookCorpus pre-trained model, and put it in thein the root directory of this repo.
+3. Modify the  'context' variable in `run.py` to your custom prompt
+4. Run `run.py`
 
 
 
