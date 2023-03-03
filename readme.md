@@ -4,7 +4,7 @@
   <img src="https://github.com/ridgerchu/SpikeGPT/blob/master/static/spikegpt.png"/>
 </p>
 
-SpikeGPT is a lightweight generative language model with pure binary, event-driven spiking activation units.
+SpikeGPT is a lightweight generative language model with pure binary, event-driven spiking activation units. The arxiv paper of SpikeGPT could be found [here](https://arxiv.org/abs/2302.13939).
 
 If you are interested in SpikeGPT, feel free to join our Discord by this [link](https://discord.gg/gdUpuTJ6QZ)!
 
