@@ -4,9 +4,9 @@
   <img src="https://github.com/ridgerchu/SpikeGPT/blob/master/static/spikegpt.png"/>
 </p>
 
-SpikeGPT is a lightweight generative language model with pure binary, event-driven spiking activation units. The arxiv paper of SpikeGPT could be found [here](https://arxiv.org/abs/2302.13939).
+SpikeGPT is a lightweight generative language model with pure binary, event-driven spiking activation units. The arxiv paper of SpikeGPT can be found [here](https://arxiv.org/abs/2302.13939).
 
-If you are interested in SpikeGPT, feel free to join our Discord by this [link](https://discord.gg/gdUpuTJ6QZ)!
+If you are interested in SpikeGPT, feel free to join our Discord using this [link](https://discord.gg/gdUpuTJ6QZ)!
 
 This repo is inspired by the [RWKV-LM](https://github.com/BlinkDL/RWKV-LM).
 
@@ -17,7 +17,7 @@ This repo is inspired by the [RWKV-LM](https://github.com/BlinkDL/RWKV-LM).
 
 ## Inference with Prompt
 
-You can choose to inference with your customized model or with our pre-trained model, our pre-trained model on BookCorpus is available [here](https://huggingface.co/ridger/SpikeGPT-BookCorpus/blob/main/BookCorpus-SpikeGPT.pth). This model only trained 900M token on BookCorpus.
+You can choose to run inference with either your own customized model or with our pre-trained model. Our pre-trained model on BookCorpus is available [here](https://huggingface.co/ridger/SpikeGPT-BookCorpus/blob/main/BookCorpus-SpikeGPT.pth). This model only trained 900M tokens on BookCorpus.
 
 1. Modify the hyper-parameter of the network, which could be found in line 36-38 of the `run.py`:
 ```python
