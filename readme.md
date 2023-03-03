@@ -26,7 +26,7 @@ n_layer = 18
 n_embd = 512
 ctx_len = 1024
 ```
-2. download our BookCorpus pre-trained model, and put it in thein the root directory of this repo.
+2. download our BookCorpus pre-trained model, and put it in the root directory of this repo.
 3. Modify the  'context' variable in `run.py` to your custom prompt
 4. Run `run.py`
 
