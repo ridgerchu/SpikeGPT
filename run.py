@@ -61,7 +61,7 @@ elif TOKEN_MODE == 'pile':
     ctx_len = 1024  
 
 os.environ['RWKV_FLOAT_MODE'] = 'fp16'  # 'bf16' / 'fp16' / 'fp32' (note: only using fp32 at this moment)
-os.environ['RWKV_RUN_DEVICE'] = 'cuda'   # 'cpu' (already very fast) or 'cuda'
+os.environ['RWKV_RUN_DEVICE'] = 'cuda' if torch.cuda.is_available() else 'cpu'  # 'cpu' (already very fast) or 'cuda'
 model_type = 'RWKV' # 'RWKV' or 'RWKV-ffnPre'
 
 ########################################################################################################
