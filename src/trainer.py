@@ -185,10 +185,10 @@ class Trainer:
             log_file.write(
                 f'{epoch + 1} {self.avg_loss:.6f} {math.exp(self.avg_loss):.4f} {self.lr:.8f} {datetime.datetime.now()} \n')
             log_file.flush()
-            run_epoch('valid')
-            log_file.write(
-                f'{epoch + 1} {self.dev_loss:.6f} {math.exp(self.dev_loss):.4f} {self.lr:.8f} {datetime.datetime.now()} \n')
-            log_file.flush()
+#             run_epoch('valid')
+#             log_file.write(
+#                 f'{epoch + 1} {self.dev_loss:.6f} {math.exp(self.dev_loss):.4f} {self.lr:.8f} {datetime.datetime.now()} \n')
+#             log_file.flush()
             #             run_epoch('test')
             #             log_file.write(
             #                 f'{epoch+1} {self.dev_loss:.6f} {math.exp(self.dev_loss):.4f} {self.lr:.8f} {datetime.datetime.now()} \n')
