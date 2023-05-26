@@ -17,7 +17,7 @@ This repo is inspired by the [RWKV-LM](https://github.com/BlinkDL/RWKV-LM).
 
 ## Inference with Prompt
 
-You can choose to run inference with either your own customized model or with our pre-trained model. Our pre-trained model on BookCorpus is available [here](https://huggingface.co/ridger/SpikeGPT-BookCorpus/blob/main/BookCorpus-SpikeGPT.pth). This model only trained 900M tokens on BookCorpus.
+You can choose to run inference with either your own customized model or with our pre-trained model. Our pre-trained model on BookCorpus is available [here]([https://huggingface.co/ridger/SpikeGPT-BookCorpus/blob/main/BookCorpus-SpikeGPT.pth](https://huggingface.co/ridger/SpikeGPT-OpenWebText-216M))[BookCorpus]. This model trained 5B tokens on OpenWebText. 
 
 1. Modify the hyper-parameter of the network, which could be found in line 36-38 of the `run.py`:
 ```python
