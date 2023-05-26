@@ -19,11 +19,11 @@ This repo is inspired by the [RWKV-LM](https://github.com/BlinkDL/RWKV-LM).
 
 You can choose to run inference with either your own customized model or with our pre-trained model. Our pre-trained model on BookCorpus is available [here]([https://huggingface.co/ridger/SpikeGPT-BookCorpus/blob/main/BookCorpus-SpikeGPT.pth](https://huggingface.co/ridger/SpikeGPT-OpenWebText-216M))[BookCorpus]. This model trained 5B tokens on OpenWebText. 
 
-1. Modify the hyper-parameter of the network, which could be found in line 36-38 of the `run.py`:
+1. Modify the hyper-parameter of the network, which could be found in line 59-61 of the `run.py`:
 ```python
 # For BookCorpus pre-trained model, you can change it if you trained your own model.
 n_layer = 18
-n_embd = 512
+n_embd = 768
 ctx_len = 1024
 ```
 2. download our BookCorpus pre-trained model, and put it in the root directory of this repo.
