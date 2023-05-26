@@ -31,7 +31,7 @@ setup_io()
 # Set TOKEN_MODE to 'pile' if you want to test pre-trained pile models.
 ########################################################################################################
 
-TOKEN_MODE = 'char' # char / bpe / pile
+TOKEN_MODE = 'pile' # char / bpe / pile
 #For book Corpus Pre-trained model
 n_layer = 18
 n_embd = 768
@@ -54,10 +54,10 @@ elif TOKEN_MODE == 'pile':
 
     #---> you can set MODEL_NAME to your fine-tuned model <---
 
-    MODEL_NAME = 'small/test-Arxiv-21'
+    MODEL_NAME = 'pikeGPT-216M'
     # MODEL_NAME = 'trained-11'
-    n_layer = 24
-    n_embd = 1024
+    n_layer = 18
+    n_embd = 768
     ctx_len = 1024  
 
 os.environ['RWKV_FLOAT_MODE'] = 'fp16'  # 'bf16' / 'fp16' / 'fp32' (note: only using fp32 at this moment)
@@ -79,7 +79,7 @@ NUM_TRIALS = 999
 LENGTH_PER_TRIAL = 100
 
 TEMPERATURE = 1.0
-top_p = 0.7
+top_p = 0.5
 top_p_newline = 0.9 # only used in TOKEN_MODE = char
 
 DEBUG_DEBUG = False  # True False --> show softmax output
