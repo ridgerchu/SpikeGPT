@@ -133,7 +133,7 @@ class TOKENIZER():
         #     print(f'{math.floor(pp*100):>3.0f}{ss}', end='')
         # print('')
 
-        cumulative_probs = torch.cumsum(sorted_probs, dim=-1).numpy()
+        cumulative_probs = torch.cumsum(sorted_probs, dim=-1).cpu().numpy()
         cutoff = float(sorted_probs[np.argmax(cumulative_probs > top_p)])
 
         probs[probs < cutoff] = 0
