@@ -6,7 +6,7 @@ from torch.nn import functional as F
 import torch.nn as nn
 from typing import List, Dict
 from src.spikingjelly.clock_driven import neuron,functional,surrogate
-import pdb
+from src.spikingjelly.clock_driven.surrogate import ATan
 
 MyModule = nn.Module
 def __nop(ob):
@@ -195,7 +195,11 @@ class RWKV_RNN(MyModule):
             w = self.w
             args = self.args
 
-            x = w.emb.weight[ctx[-1]]
+            if self.args.vocab_size == 77:
+                atan = ATan()
+                x = atan(w.emb.weight[ctx[-1]])
+            else:
+                x = w.emb.weight[ctx[-1]]
             if self.RUN_DEVICE == 'cuda':
                 x = x.cuda()
             try:
