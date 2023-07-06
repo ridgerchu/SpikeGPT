@@ -29,6 +29,7 @@ args.FLOAT_MODE = "fp32" # fp16 (good for GPU, does not work for CPU) // fp32 (g
 #     os.environ["RWKV_RUN_BACKEND"] = 'nvfuser' # !!!BUGGY!!! wrong output
 os.environ["RWKV_JIT_ON"] = '1' # '1' or '0'. very useful for GPU/CPU fp32, but might be harmful for GPU fp16. please benchmark !!!
 
+#change TOKEN_MODE to char if you want to use the BookCorpus pre-trained model
 TOKEN_MODE = "pile"
 WORD_NAME = [
     "20B_tokenizer.json",
