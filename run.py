@@ -32,7 +32,8 @@ os.environ["RWKV_JIT_ON"] = '1' # '1' or '0'. very useful for GPU/CPU fp32, but 
 #For BookCorpus Pre-trained model
 # TOKEN_MODE = "char"
 # WORD_NAME = "vocab_book"
-# UNKNOWN_CHAR = None
+# UNKNOWN_CHAR = ' '
+# vocab_size = 77
 
 #For 216M OpenWebText Pre-trained model
 TOKEN_MODE = "pile"
@@ -209,6 +210,7 @@ for TRIAL in range(1 if DEBUG_DEBUG else NUM_TRIALS):
             top_p_usual=top_p,
             top_p_newline=top_p_newline,
         )
+        ttt = int(ttt)
         ctx += [ttt]
 
         if tokenizer.charMode:
