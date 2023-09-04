@@ -6,3 +6,4 @@ torchvision
 scipy
 ninja
 accelerate
+transformers
