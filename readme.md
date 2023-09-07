@@ -10,6 +10,8 @@ If you are interested in SpikeGPT, feel free to join our Discord using this [lin
 
 This repo is inspired by the [RWKV-LM](https://github.com/BlinkDL/RWKV-LM).
 
+If you find yourself struggling with environment configuration, consider using the Docker image for SpikeGPT available on [Github](https://github.com/eddiem3/SpikeGPT-container).
+
 ## Training on Enwik8
 
 1. Download the [enwik8 dataset](https://data.deepai.org/enwik8.zip).
