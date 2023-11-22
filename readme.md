@@ -24,6 +24,9 @@ You can choose to run inference with either your own customized model or with ou
 2. Modify the  'context' variable in `run.py` to your custom prompt
 3. Run `run.py`
 
+##Fine-Tune with NLU tasks
+1. run the file in 'NLU' folders
+2. change the path in line 17 to the model path
 
 
 ## Citation
