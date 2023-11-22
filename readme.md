@@ -37,7 +37,7 @@ If you find SpikeGPT useful in your work, please cite the following source:
 ```
 @article{zhu2023spikegpt,
         title = {SpikeGPT: Generative Pre-trained Language Model with Spiking Neural Networks},
-        author = {Zhu, Rui-Jie and Zhao, Qihang and Eshraghian, Jason K.},
+        author = {Zhu, Rui-Jie and Zhao, Qihang and Li, Guoqi and Eshraghian, Jason K.},
         journal = {arXiv preprint arXiv:2302.13939},
         year    = {2023}
 }
