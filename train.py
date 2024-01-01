@@ -20,7 +20,7 @@ torch.backends.cuda.matmul.allow_tf32 = True
 
 ### Step 1: set training data ##########################################################################
 
-datafile_train = "enwik8"
+datafile_train = "enwik8" # txt file or binidx file
 datafile_valid = "valid.txt"
 datafile_test = "test.txt"
 datafile_encoding = 'utf-8'
@@ -79,10 +79,10 @@ print('loading data... ' + datafile_train)
 train_dataset = Dataset(open(
     datafile_train, "r", encoding=datafile_encoding).read(), ctx_len, epoch_length_fixed)
 
-#train_dataset = Dataset(MMapIndexedDataset(datafile_train), ctx_len, epoch_length_fixed)
+#train_dataset = Dataset(MMapIndexedDataset(datafile_train), ctx_len, epoch_length_fixed) #use it when you use binidx files
 
 # valid_dataset = Dataset(open(
-#     datafile_valid, "r", encoding=datafile_encoding).read(), ctx_len, epoch_length_fixed)
+#     datafile_valid, "r", encoding=datafile_encoding).read(), ctx_len, epoch_length_fixed) 
 
 # test_dataset = Dataset(open(
 #     datafile_test, "r", encoding=datafile_encoding).read(), ctx_len, epoch_length_fixed)
