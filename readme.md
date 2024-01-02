@@ -17,6 +17,23 @@ If you find yourself struggling with environment configuration, consider using t
 1. Download the [enwik8 dataset](https://data.deepai.org/enwik8.zip).
 2. Run `train.py`
 
+## Pre-training on large corpus
+
+1. **Pre-Training on a Large Corpus**: 
+   - To begin, pre-tokenize your corpus data. 
+   - For custom data, use the [jsonl2binidx tool](https://github.com/Abel2076/json2binidx_tool) to convert your data. 
+   - If you prefer pre-tokenized data, consider using [The Pile](https://huggingface.co/datasets/RichardErkhov/RWKV-LM_pile_binidx_dataset), which is equipped with a 20B tokenizer and is used in GPT-NeoX and Pythia. 
+   - If resources are limited, you may use just one file from the dataset instead of the entire collection.
+
+2. **Configuring the Training Script**: 
+   - In `train.py`, uncomment line 82 to enable `MMapIndexedDataset` as the dataset class. 
+   - Change `datafile_train` to the filename of your binidx file. 
+   - Important: Do not include the `.bin` or `.idx` file extensions.
+
+3. **Starting Multi-GPU Training**:
+   - Utilize Hugging Face's Accelerate to begin training on multiple GPUs.
+
+
 ## Inference with Prompt
 
 You can choose to run inference with either your own customized model or with our pre-trained model. Our pre-trained model is available [here](https://huggingface.co/ridger/SpikeGPT-OpenWebText-216M). This model trained 5B tokens on OpenWebText. 
