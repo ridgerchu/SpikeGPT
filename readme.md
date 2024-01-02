@@ -22,7 +22,7 @@ If you find yourself struggling with environment configuration, consider using t
 1. **Pre-Training on a Large Corpus**: 
    - To begin, pre-tokenize your corpus data. 
    - For custom data, use the [jsonl2binidx tool](https://github.com/Abel2076/json2binidx_tool) to convert your data. 
-   - If you prefer pre-tokenized data, consider using [The Pile](https://huggingface.co/datasets/RichardErkhov/RWKV-LM_pile_binidx_dataset), which is equipped with a 20B tokenizer and is used in GPT-NeoX and Pythia. 
+   - If you prefer pre-tokenized data, consider using pre-tokenized [The Pile](https://huggingface.co/datasets/RichardErkhov/RWKV-LM_pile_binidx_dataset), which is equipped with a 20B tokenizer and is used in GPT-NeoX and Pythia. 
    - If resources are limited, you may use just one file from the dataset instead of the entire collection.
 
 2. **Configuring the Training Script**: 
