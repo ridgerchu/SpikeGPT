@@ -33,6 +33,16 @@ If you find yourself struggling with environment configuration, consider using t
 3. **Starting Multi-GPU Training**:
    - Utilize Hugging Face's Accelerate to begin training on multiple GPUs.
 
+## Fine-Tuning on WikiText-103
+
+1. **Downloading Pre-Tokenized WikiText-103**:
+   - You can obtain the pre-tokenized WikiText-103 dataset equipped with a 20B tokenizer from this [Hugging Face dataset link](https://huggingface.co/datasets/ridger/Wikitext-103-tokenized-20B-tokenizer/tree/main).
+
+2. **Fine-Tuning the Model**:
+   - Use the same approach as in pre-training for fine-tuning your model with this dataset.
+   - **Important**: Set a smaller learning rate than during the pre-training stage to avoid catastrophic forgetting. A recommended learning rate is around `3e-6`.
+   - For the batch size, it's advisable to adjust according to your specific requirements to find an optimal setting for your case.
+
 
 ## Inference with Prompt
 
