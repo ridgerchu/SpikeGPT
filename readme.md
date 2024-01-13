@@ -14,8 +14,17 @@ If you find yourself struggling with environment configuration, consider using t
 
 ## Training on Enwik8
 
-1. Download the [enwik8 dataset](https://data.deepai.org/enwik8.zip).
-2. Run `train.py`
+1. Download the `enwik8` dataset by visiting the following link:
+   [enwik8 dataset](https://data.deepai.org/enwik8.zip).
+
+2. Modify the train set, validate set, and test set paths in the `train.py` script to match the directory where you've extracted the files. For example, if you've extracted the files to a directory named `enwik8_data`, your `train.py` script should be updated as follows:
+
+   ```python
+   # Set the paths for the datasets
+   datafile_train = "path/to/enwik8_data/train"
+   datafile_valid = "path/to/enwik8_data/validate"
+   datafile_test = "path/to/enwik8_data/test"
+
 
 ## Pre-training on large corpus
 
