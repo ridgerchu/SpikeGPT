@@ -70,11 +70,12 @@ You can choose to run inference with either your own customized model or with ou
 
 If you find SpikeGPT useful in your work, please cite the following source:
 
+
 ```
 @article{zhu2023spikegpt,
-        title = {Autonomous Driving with Spiking Neural Networks},
-        author = {Rui-Jie Zhu and Ziqing Wang and Leilani Gilpin and Jason K. Eshraghian},
-        journal = {arXiv preprint arXiv:2405.19687},
-        year    = {2024}
+        title = {SpikeGPT: Generative Pre-trained Language Model with Spiking Neural Networks},
+        author = {Zhu, Rui-Jie and Zhao, Qihang and Li, Guoqi and Eshraghian, Jason K.},
+        journal = {arXiv preprint arXiv:2302.13939},
+        year    = {2023}
 }
 ```
