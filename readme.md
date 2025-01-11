@@ -45,7 +45,7 @@ If you find yourself struggling with environment configuration, consider using t
 ## Fine-Tuning on WikiText-103
 
 1. **Downloading Pre-Tokenized WikiText-103**:
-   - You can obtain the pre-tokenized WikiText-103 dataset `binidx` file from this [Hugging Face dataset link](https://huggingface.co/datasets/ridger/Wikitext-103-tokenized-20B-tokenizer/tree/main).
+   - You can obtain the pre-tokenized WikiText-103 dataset `binidx` file from this [Hugging Face dataset link](https://huggingface.co/datasets/ridger/Wikitext-series-NeoX-tokenizer/tree/main).
 
 2. **Fine-Tuning the Model**:
    - Use the same approach as in pre-training for fine-tuning your model with this dataset.
